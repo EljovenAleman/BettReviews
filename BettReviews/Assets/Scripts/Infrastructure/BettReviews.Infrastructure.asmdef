@@ -1,0 +1,15 @@
+{
+    "name": "BettReviews.Infrastructure",
+    "references": [
+        "GUID:1473931bae508df44b34a89a0700cac0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
