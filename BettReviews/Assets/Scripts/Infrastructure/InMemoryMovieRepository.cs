@@ -18,7 +18,7 @@ public class InMemoryMovieRepository : IMovieRepository
 
 
 
-        return Task.FromException<Movie>(new Exception());
+        return Task.FromException<Movie>(new MovieNotFoundException(movieID));
 
 
     }
@@ -29,4 +29,6 @@ public class InMemoryMovieRepository : IMovieRepository
 
         return Task.CompletedTask;
     }
+
+
 }
