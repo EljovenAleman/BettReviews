@@ -1,4 +1,4 @@
-﻿public class Review
+﻿public struct Review
 {
 
     public string Body { get; }

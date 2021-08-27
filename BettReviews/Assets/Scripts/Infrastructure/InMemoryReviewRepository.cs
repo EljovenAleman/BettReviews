@@ -15,7 +15,8 @@ public class InMemoryReviewRepository : IReviewRepository
             }
         }
 
-        return Task.FromResult<Review>(null);
+        return Task.FromException<Review>(new ReviewNotFoundException(movieID, reviewerEmail));
+        
     }
 
     public Task SaveReview(Review review)
