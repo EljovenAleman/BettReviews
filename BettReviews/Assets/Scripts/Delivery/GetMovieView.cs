@@ -5,10 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GetMovieView : MonoBehaviour
-{
-    //[SerializeField] Button returnButton;
-    [SerializeField] GameObject selectActionView;
-
+{    
     [SerializeField] TMP_InputField movieNameField;
 
     GetMovieViewPresenter getMovieViewPresenter;
@@ -20,20 +17,10 @@ public class GetMovieView : MonoBehaviour
     void Start()
     {
         //returnButton.onClick.AddListener(Return);
-        movieNameField.onSubmit.AddListener(null);
-        getMovieViewPresenter = new GetMovieViewPresenter(new IMDBSearchMovieService());
+
+        getMovieViewPresenter = new GetMovieViewPresenter(new IMDBSearchMovieService(), UnityMainThreadTaskHandler.GetInstance());
+        movieNameField.onSubmit.AddListener(getMovieViewPresenter.OnSubmitMovie);
 
     }
-
-    void Return()
-    {
-        gameObject.SetActive(false);
-        selectActionView.SetActive(true);
-    }
-
-    void OnSubmitMovieName(string movieName)
-    {
-
-    }
-    
+        
 }
