@@ -141,6 +141,13 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "jillejr.newtonsoft.json-for-unity": {
+      "version": "13.0.102",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
     "net.tnrd.nsubstitute": {
       "version": "4.2.2",
       "depth": 0,
