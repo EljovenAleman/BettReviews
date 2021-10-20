@@ -6,16 +6,16 @@ public struct Movie
 {
 
     public string Name { get; }
-    public DateTime Date { get; }
+    public string Year { get; }
     public string ImageUrl { get; }
-    public int MinutesLength { get; }
+    public string MinutesLength { get; }
 
     public string Id { get; }
 
-    public Movie(string name, DateTime date, string imageUrl, int minutesLength, string id)
+    public Movie(string name, string date, string imageUrl, string minutesLength, string id)
     {
         Name = name;
-        Date = date;
+        Year = date;
         ImageUrl = imageUrl;
         MinutesLength = minutesLength;
         Id = id;

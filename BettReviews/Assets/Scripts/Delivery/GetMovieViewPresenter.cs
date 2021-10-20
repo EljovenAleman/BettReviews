@@ -18,6 +18,6 @@ public class GetMovieViewPresenter
 
     void OnMovieFound(Movie movie)
     {
-        Debug.Log("Encontré la movie");
+        Debug.Log("Encontré la movie y su ID es " + movie.Id);
     }
 }

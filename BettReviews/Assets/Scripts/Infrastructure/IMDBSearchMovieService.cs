@@ -4,26 +4,60 @@ using System.Collections;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using UnityEngine;
+using System.Net.Http;
 
 public class IMDBSearchMovieService : ISearchMovieService
 {
-    
-    public Task<Movie> SearchMovie(string movieName)
+    HttpClient httpClient = new HttpClient();
+
+
+    public async Task<Movie> SearchMovie(string movieName)
     {
-        return Task.FromResult<Movie>(new Movie("name", DateTime.Now, "imageulr", 90, "stringid"));
+        //return Task.FromResult<Movie>(new Movie("name", DateTime.Now, "imageulr", 90, "stringid"));
+        var itemsBody = await httpClient.GetStringAsync("http://www.omdbapi.com/?apikey=6aaadb49&s=" + movieName);
+        var item = ToSearchItem(itemsBody);
+
+        var movieBody = await httpClient.GetStringAsync("http://www.omdbapi.com/?apikey=6aaadb49&i=" + item.imdbID);
+
+        return ToMovie(movieBody);
+
+    }    
+
+    private Movie ToMovie(string movieBody)
+    {
+        var deserializedMovie = JsonConvert.DeserializeObject<DeserializedMovie>(movieBody);
+
+        return new Movie(deserializedMovie.Title, deserializedMovie.Year, deserializedMovie.Poster, deserializedMovie.Runtime, deserializedMovie.imdbID);
     }
 
-    private IEnumerator RequestIMBD(string stringToSearch)
+    
+    private SearchItem ToSearchItem(string responseBody)
+    {        
+        SearchResult result = JsonConvert.DeserializeObject<SearchResult>(responseBody);
+
+        return result.Search[0];
+
+
+    }
+
+    private class DeserializedMovie
     {
-        var request = UnityWebRequest.Get("http://www.omdbapi.com/?apikey=6aaadb49&s=" + stringToSearch);
 
-        yield return request.SendWebRequest();
+        public string Title { get; }
+        public string Year { get; }
+        public string Poster { get; }
+        public string Runtime { get; }
+        public string imdbID { get; }
 
-        var responseData = request.downloadHandler.text;
-       
-        SearchResult result = JsonConvert.DeserializeObject<SearchResult>(responseData);
 
-        yield return null;
+        public DeserializedMovie(string title, string year, string poster, string runtime, string imdbID)
+        {
+            Title = title;
+            Year = year;
+            Poster = poster;
+            Runtime = runtime;
+            this.imdbID = imdbID;
+        }
     }
 
     private class SearchResult

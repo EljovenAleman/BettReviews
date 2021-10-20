@@ -40,7 +40,7 @@ public class GetMovieViewPresenterShould : MonoBehaviour
 
         string movieName = "testMovie";
 
-        var movieTask = Task<Movie>.FromResult(new Movie("name", DateTime.Now, "imageURL", 90, "movieID"));
+        var movieTask = Task<Movie>.FromResult(new Movie("name", "fecha", "imageURL", "90", "movieID"));
 
         searchMovieService.SearchMovie(movieName).Returns(movieTask);
 
